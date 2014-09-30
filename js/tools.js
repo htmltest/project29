@@ -21,12 +21,14 @@ var timerDevelopmentSlider  = null;
             });
         } else {
             $('.side').addClass('side-hover');
-            $('.main').mousewheel(function(event, delta) {
-                if (delta < 0) {
-                    $('.main-ctrl a.active').next().click();
-                } else {
-                    $('.main-ctrl a.active').prev().click();
-                }
+            $('.main').each(function() {
+                $('.main').mousewheel(function(event, delta) {
+                    if (delta < 0) {
+                        $('.main-ctrl a.active').next().click();
+                    } else {
+                        $('.main-ctrl a.active').prev().click();
+                    }
+                });
             });
         }
 
@@ -223,7 +225,9 @@ var timerDevelopmentSlider  = null;
         });
 
         $('body').on('click', '.sert-list a, .service-top a, .structure-item-name a, .service-link, .service-order-link a', function(e) {
-            windowClose();
+            if ($('.window').length > 0) {
+                windowClose();
+            }
             $.ajax({
                 url: $(this).attr('href'),
                 dataType: 'html',
@@ -338,12 +342,12 @@ var timerDevelopmentSlider  = null;
         var windowHeight    = $(window).height();
         var curScrollTop    = $(window).scrollTop();
 
-        $('body').css({'width': windowWidth, 'height': windowHeight, 'overflow': 'hidden'});
+        $('body').css({'height': windowHeight, 'overflow-y': 'hidden'});
         $(window).scrollTop(0);
         $('.wrapper').css({'top': -curScrollTop});
         $('.wrapper').data('scrollTop', curScrollTop);
 
-        $('body').append('<div class="window"><div class="window-overlay"></div><div class="window-loading"></div><div class="window-container window-container-load"><div class="window-content">' + contentWindow + '<a href="#" class="window-close"></a></div></div></div>')
+        $('body').append('<div class="window"><div class="window-overlay"></div><div class="window-loading"></div><div class="window-container window-container-load"><div class="window-content">' + contentWindow + '<a href="#" class="window-close"></a></div><a href="#" class="window-close-bottom">Закрыть</a></div></div>')
 
         if ($('.window-container img').length > 0) {
             $('.window-container img').each(function() {
@@ -370,7 +374,7 @@ var timerDevelopmentSlider  = null;
             windowClose();
         });
 
-        $('.window-close').click(function(e) {
+        $('.window-close, .window-close-bottom').click(function(e) {
             windowClose();
             e.preventDefault();
         });
@@ -414,8 +418,8 @@ var timerDevelopmentSlider  = null;
     function windowClose() {
         $('body').unbind('keyup', keyUpBody);
         $('.window').remove();
-        $('.wrapper').css({'top': 'auto', 'left': 'auto'});
-        $('body').css({'width': 'auto', 'height': '100%', 'overflow': 'visible'});
+        $('.wrapper').css({'top': 'auto'});
+        $('body').css({'height': 'auto', 'overflow-y': 'visible'});
         $(window).scrollTop($('.wrapper').data('scrollTop'));
     }
 

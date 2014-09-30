@@ -9,7 +9,7 @@ a {color:#716f87; outline:none}
 
 img {border:none}
 
-.wrapper {position:relative}
+.wrapper {position:relative; min-height:100%}
 
 .side {position:fixed; z-index:10; left:0; top:0; height:100%; background:#fff}
 .side-inner {position:relative}
@@ -332,6 +332,9 @@ input.btn {min-width:170px}
 .window-close {display:block; position:absolute; right:-52px; top:0; width:52px; height:52px; background:#1f1584 url(../images/window-close.png) no-repeat center}
 .window-close:hover {background-color:#2187c9}
 .window-close:active {background-color:#2178c9}
+.window-close-bottom {display:block; margin:0 auto; width:137px; height:41px; text-decoration:none; text-align:center; text-transform:uppercase; color:#fff; font:14px/41px "pf_square_sans_pro_light", "PT Sans", aria, helvetica, sans-serif; background:#1f1584}
+.window-close-bottom:hover {background:#2187c9}
+.window-close-bottom:active {background:#2178c9}
 
 .window .content {position:relative; padding:10px 40px; margin-left:0; max-width:none}
 @media (min-width:769px) {
