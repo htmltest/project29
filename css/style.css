@@ -75,6 +75,7 @@ footer {position:fixed; left:0; bottom:0; width:100%; min-width:850px; height:54
 @media (min-width:769px) {
     .content {margin-left:420px; padding-left:80px; padding-right:80px}
 }
+.content:after {content:"."; display:block; clear:both; visibility:hidden; height:0}
 .content h1 {color:#1b1464; margin:0 0 26px 0; padding:0; font:48px/48px "pf_square_sans_pro_light", "PT Sans", aria, helvetica, sans-serif}
 .content h2 {color:#1b1464; margin:26px 0; padding:0; font:36px/36px "pf_square_sans_pro_light", "PT Sans", aria, helvetica, sans-serif}
 .content-back-link+h2 {margin-top:0}
@@ -311,7 +312,7 @@ input.btn {min-width:170px}
 .news-detail-date {color:#c1c1c2; font:18px/36px "pf_square_sans_pro_light", "PT Sans", aria, helvetica, sans-serif; margin:24px 0 29px 0}
 
 .sert-list {margin:18px 0; width:100%; overflow:hidden; position:relative; font-size:0; line-height:0; letter-spacing:-1px}
-.sert-list-inner {position:relative; margin:0 0 0 -57px}
+.sert-list-inner {position:relative; margin:0 0 -27px -57px}
 .sert-list a {display:inline-block; vertical-align:top; width:195px; margin:0 0 27px 57px; text-decoration:none; color:#525252}
 .sert-list-big .sert-list-inner {margin-left:-66px}
 .sert-list-big a {width:254px; margin-left:66px}
@@ -336,7 +337,7 @@ input.btn {min-width:170px}
 .window-close-bottom:hover {background:#2187c9}
 .window-close-bottom:active {background:#2178c9}
 
-.window .content {position:relative; padding:10px 40px; margin-left:0; max-width:none}
+.window .content {position:relative; padding:10px 40px 37px 40px; margin-left:0; max-width:none}
 @media (min-width:769px) {
     .window .content {margin-left:0; padding-left:40px; padding-right:40px}
 }
@@ -345,8 +346,8 @@ input.btn {min-width:170px}
 
 .service-top {width:100%; background:#2187c9; background:#2187c9; text-transform:uppercase; font-size:12px; line-height:14px; position:relative; overflow:hidden}
 .service-top:after {content:"."; display:block; clear:both; visibility:hidden; height:0}
-.service-top-prev {float:left; display:table; max-width:200px; margin:0 0 0 40px}
-.service-top-next {float:right; display:table; max-width:200px; margin:0 40px 0 0}
+.service-top-prev {float:left; display:table; max-width:400px; margin:0 0 0 40px}
+.service-top-next {float:right; display:table; max-width:400px; margin:0 40px 0 0}
 .service-top-prev a {display:table-cell; padding:0 0 0 30px; height:54px; background:url(../images/service-top-left.png) no-repeat left center; vertical-align:middle; text-decoration:none; color:#fff}
 .service-top-next a {display:table-cell; padding:0 30px 0 0; text-align:right; height:54px; background:url(../images/service-top-right.png) no-repeat right center; vertical-align:middle; text-decoration:none; color:#fff}
 
@@ -387,6 +388,7 @@ input.btn {min-width:170px}
 
 .structure-table-2 table {width:100%; border-collapse:collapse; border-bottom:0}
 .structure-table-2 table td {vertical-align:middle; padding:0 20px; height:89px; width:50%; border-top:none; border-left:20px solid #fff; border-bottom:20px solid #fff; text-align:left; font:18px/18px "pf_square_sans_pro_light", "PT Sans", aria, helvetica, sans-serif; background-color:#030227; background-position:center; background-repeat:no-repeat; -webkit-background-size:cover; -moz-background-size:cover; -o-background-size:cover; background-size:cover}
+.structure-table-2 table td.structure-empty {background:none}
 .structure-table-2 table td.structure-bg-01 {background-image:url(../images/structure-table-bg-01.jpg)}
 .structure-table-2 table td.structure-bg-02 {background-image:url(../images/structure-table-bg-02.jpg)}
 .structure-table-2 table td.structure-bg-03 {background-image:url(../images/structure-table-bg-03.jpg)}
