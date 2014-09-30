@@ -222,6 +222,18 @@ var timerDevelopmentSlider  = null;
             e.preventDefault();
         });
 
+        $('body').on('click', '.sert-list a, .service-top a, .structure-item-name a, .service-link, .service-order-link a', function(e) {
+            windowClose();
+            $.ajax({
+                url: $(this).attr('href'),
+                dataType: 'html',
+                cache: false
+            }).done(function(html) {
+                windowOpen(html);
+            })
+            e.preventDefault();
+        });
+
     });
 
     $(window).bind('load resize', function() {
@@ -314,8 +326,97 @@ var timerDevelopmentSlider  = null;
             $('.news-slider').data('curIndex', 0);
         });
 
-        $('.main-ctrl').css({'margin-top': -$('.main-ctrl').height() / 2, 'right': $(window).width() - $('.main').width() - Number($('.main').css('margin-left').replace(/px/, '')) + 22});
+        $('.main-ctrl').each(function() {
+            $('.main-ctrl').css({'margin-top': -$('.main-ctrl').height() / 2, 'right': $(window).width() - $('.main').width() - Number($('.main').css('margin-left').replace(/px/, '')) + 22});
+        });
 
     });
+
+    // открытие окна
+    function windowOpen(contentWindow) {
+        var windowWidth     = $(window).width();
+        var windowHeight    = $(window).height();
+        var curScrollTop    = $(window).scrollTop();
+
+        $('body').css({'width': windowWidth, 'height': windowHeight, 'overflow': 'hidden'});
+        $(window).scrollTop(0);
+        $('.wrapper').css({'top': -curScrollTop});
+        $('.wrapper').data('scrollTop', curScrollTop);
+
+        $('body').append('<div class="window"><div class="window-overlay"></div><div class="window-loading"></div><div class="window-container window-container-load"><div class="window-content">' + contentWindow + '<a href="#" class="window-close"></a></div></div></div>')
+
+        if ($('.window-container img').length > 0) {
+            $('.window-container img').each(function() {
+                $(this).attr('src', $(this).attr('src'));
+            });
+            $('.window-container').data('curImg', 0);
+            $('.window-container img').load(function() {
+                var curImg = $('.window-container').data('curImg');
+                curImg++;
+                $('.window-container').data('curImg', curImg);
+                if ($('.window-container img').length == curImg) {
+                    $('.window-loading').remove();
+                    $('.window-container').removeClass('window-container-load');
+                    windowPosition();
+                }
+            });
+        } else {
+            $('.window-loading').remove();
+            $('.window-container').removeClass('window-container-load');
+            windowPosition();
+        }
+
+        $('.window-overlay').click(function() {
+            windowClose();
+        });
+
+        $('.window-close').click(function(e) {
+            windowClose();
+            e.preventDefault();
+        });
+
+        $('body').bind('keyup', keyUpBody);
+    }
+
+    function windowPosition() {
+        var windowWidth     = $(window).width();
+        var windowHeight    = $(window).height();
+
+        if (windowWidth > 1000) {
+            $('.window-container').width(1000);
+        } else {
+            $('.window-container').width(windowWidth);
+        }
+
+        if ($('.window-container').width() > windowWidth - 40) {
+            $('.window-container').css({'margin-left': 20, 'left': 'auto'});
+            $('.window-overlay').width($('.window-container').width() + 40);
+        } else {
+            $('.window-container').css({'margin-left': -$('.window-container').width() / 2});
+        }
+
+        if ($('.window-container').height() > windowHeight - 40) {
+            $('.window-container').css({'margin-top': 20, 'top': 'auto'});
+            $('.window-overlay').height($('.window-container').height() + 40);
+        } else {
+            $('.window-container').css({'margin-top': -$('.window-container').height() / 2});
+        }
+    }
+
+    // обработка Esc после открытия окна
+    function keyUpBody(e) {
+        if (e.keyCode == 27) {
+            windowClose();
+        }
+    }
+
+    // закрытие окна
+    function windowClose() {
+        $('body').unbind('keyup', keyUpBody);
+        $('.window').remove();
+        $('.wrapper').css({'top': 'auto', 'left': 'auto'});
+        $('body').css({'width': 'auto', 'height': '100%', 'overflow': 'visible'});
+        $(window).scrollTop($('.wrapper').data('scrollTop'));
+    }
 
 })(jQuery);

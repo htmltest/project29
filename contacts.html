@@ -25,140 +25,146 @@
 
     <body>
 
-        <!-- side -->
-        <div class="side">
-            <div class="side-inner">
+        <!-- wrapper -->
+        <div class="wrapper">
 
-                <!-- side main -->
-                <div class="side-main">
+            <!-- side -->
+            <div class="side">
+                <div class="side-inner">
 
-                    <div class="logo"><img src="images/logo.png" alt="" width="141" height="124" /></div>
+                    <!-- side main -->
+                    <div class="side-main">
 
-                    <nav>
-                        <ul>
-                            <li><a href="#">О предприятии</a></li>
-                            <li><a href="#">Деятельность</a></li>
-                            <li><a href="#">Документы</a></li>
-                            <li><a href="#">Пресс-центр</a></li>
-                            <li class="active"><a href="#">Контакты</a><span></span></li>
-                        </ul>
-                    </nav>
+                        <div class="logo"><img src="images/logo.png" alt="" width="141" height="124" /></div>
 
-                    <div class="contacts">
-                        <div class="contacts-title">Адрес</div>
-                        <div class="contacts-text">107113, Москва, <a href="#">Сокольнический вал, 37/10</a></div>
-                        <div class="contacts-title">Телефон / факс</div>
-                        <div class="contacts-text">+7 (495) 287-45-63<br />+7 (499) 264-77-77</div>
+                        <nav>
+                            <ul>
+                                <li><a href="#">О предприятии</a></li>
+                                <li><a href="#">Деятельность</a></li>
+                                <li><a href="#">Документы</a></li>
+                                <li><a href="#">Пресс-центр</a></li>
+                                <li class="active"><a href="#">Контакты</a><span></span></li>
+                            </ul>
+                        </nav>
+
+                        <div class="contacts">
+                            <div class="contacts-title">Адрес</div>
+                            <div class="contacts-text">107113, Москва, <a href="#">Сокольнический вал, 37/10</a></div>
+                            <div class="contacts-title">Телефон / факс</div>
+                            <div class="contacts-text">+7 (495) 287-45-63<br />+7 (499) 264-77-77</div>
+                        </div>
+
+                        <footer>
+                            <a href="#" class="cabinet">Личный кабинет</a>
+                            <a href="#" class="feedback">Обратная связь</a>
+                            <div class="copyrights">© 2013 г., Официальный сайт ФГУП «НИИСУ»</div>
+                            <div class="developer">Разработка сайта <a href="#">Bilingo</a></div>
+                        </footer>
                     </div>
+                    <!-- side main END -->
 
-                    <footer>
-                        <a href="#" class="cabinet">Личный кабинет</a>
-                        <a href="#" class="feedback">Обратная связь</a>
-                        <div class="copyrights">© 2013 г., Официальный сайт ФГУП «НИИСУ»</div>
-                        <div class="developer">Разработка сайта <a href="#">Bilingo</a></div>
-                    </footer>
+                    <div class="side-ctrl"></div>
+
                 </div>
-                <!-- side main END -->
-
-                <div class="side-ctrl"></div>
-
             </div>
-        </div>
-        <!-- side END -->
+            <!-- side END -->
 
-        <!-- banner -->
-        <div class="banner">
-            <div class="banner-inner">
-                <div class="banner-img"><img src="files/banner.jpg" alt="" class="img-max" /></div>
-                <div class="banner-container">
-                    <div class="banner-wrap">
-                        <div class="banner-content">
-                            <div class="banner-text">04 сентября по 05 сентября 2014 г. в рамках X Международной выставки по гидроавиации «ГИДРОАВИАСАЛОН-2014», в г. Геленджик на берегу Геленджикской бухты состоится конференция «Обеспечение качества и конкурентоспособности авиационной техники»</div>
-                            <div class="banner-link"><a href="#">Подробнее</a></div>
+            <!-- banner -->
+            <div class="banner">
+                <div class="banner-inner">
+                    <div class="banner-img"><img src="files/banner.jpg" alt="" class="img-max" /></div>
+                    <div class="banner-container">
+                        <div class="banner-wrap">
+                            <div class="banner-content">
+                                <div class="banner-text">04 сентября по 05 сентября 2014 г. в рамках X Международной выставки по гидроавиации «ГИДРОАВИАСАЛОН-2014», в г. Геленджик на берегу Геленджикской бухты состоится конференция «Обеспечение качества и конкурентоспособности авиационной техники»</div>
+                                <div class="banner-link"><a href="#">Подробнее</a></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- banner END -->
+            <!-- banner END -->
 
-        <!-- map -->
-        <div class="map">
-            <div class="map-container" id="map"></div>
-            <script src="http://api-maps.yandex.ru/2.0/?load=package.full&lang=ru-RU" type="text/javascript"></script>
-            <script type="text/javascript">
-                ymaps.ready(init);
+            <!-- map -->
+            <div class="map">
+                <div class="map-container" id="map"></div>
+                <script src="http://api-maps.yandex.ru/2.0/?load=package.full&lang=ru-RU" type="text/javascript"></script>
+                <script type="text/javascript">
+                    ymaps.ready(init);
 
-                var myMap;
+                    var myMap;
 
-                $(window).bind('load resize', function() {
-                    $('.map-container').css({'height': $(window).height()});
-                    if (myMap) {
-                        myMap.container.fitToViewport();
-                    }
-                });
-
-                function init () {
-                    $('.map-container').css({'height': $(window).height()});
-
-                    myMap = new ymaps.Map('map', {
-                        center: [56.136, 40.390],
-                        zoom: 17
+                    $(window).bind('load resize', function() {
+                        $('.map-container').css({'height': $(window).height()});
+                        if (myMap) {
+                            myMap.container.fitToViewport();
+                        }
                     });
 
-                    var myGeocoder = ymaps.geocode('Москва, Сокольнический вал, 37/10');
-                    myGeocoder.then(
-                        function (res) {
-                            var coords = res.geoObjects.get(0).geometry.getCoordinates();
-                            myPlacemark = new ymaps.Placemark(coords, {}, {
-                                iconImageHref: 'images/map-icon.png',
-                                iconImageSize: [131, 54],
-                                iconImageOffset: [-65, -50]
-                            });
-                            myMap.geoObjects.add(myPlacemark);
-                            myMap.setCenter(coords);
-                        },
-                        function (err) {
-                            alert('Ошибка');
-                        }
-                    );
+                    function init () {
+                        $('.map-container').css({'height': $(window).height()});
 
-                }
-            </script>
+                        myMap = new ymaps.Map('map', {
+                            center: [56.136, 40.390],
+                            zoom: 17
+                        });
 
-            <div class="map-text">
-                <div class="map-text-inner">
-                    <div class="map-title">Федеральное государственное унитарное предприятие «Научно-исследовательский институт стандартизации и унификации»</div>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>Адрес:</td>
-                                <td>107113, Москва, Сокольнический вал, 37/10</td>
-                            </tr>
-                            <tr>
-                                <td>Телефон:</td>
-                                <td>+7 (495) 287-45-63</td>
-                            </tr>
-                            <tr>
-                                <td>Факс:</td>
-                                <td>+7 (499) 264-77-77</td>
-                            </tr>
-                            <tr>
-                                <td>E-mail:</td>
-                                <td><a href="mailto:info@niisu.ru">info@niisu.ru</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="map-text-how">
-                        <h3>Как проехать</h3>
-                        Иначе говоря, политические учения Гоббса ограничивает феномен толпы, отмечает Г.Алмонд. Политическое учение Платона однозначно сохраняет антропологический марксизм. Понятие модернизации отражает конструктивный кризис легитимности. Элемент политического процесса теоретически иллюстрирует марксизм. Вопреки распространенным утверждениям, политическое учение Аристотеля иллюстрирует коллапс Советского Союза.
+                        var myGeocoder = ymaps.geocode('Москва, Сокольнический вал, 37/10');
+                        myGeocoder.then(
+                            function (res) {
+                                var coords = res.geoObjects.get(0).geometry.getCoordinates();
+                                myPlacemark = new ymaps.Placemark(coords, {}, {
+                                    iconImageHref: 'images/map-icon.png',
+                                    iconImageSize: [131, 54],
+                                    iconImageOffset: [-65, -50]
+                                });
+                                myMap.geoObjects.add(myPlacemark);
+                                myMap.setCenter(coords);
+                            },
+                            function (err) {
+                                alert('Ошибка');
+                            }
+                        );
+
+                    }
+                </script>
+
+                <div class="map-text">
+                    <div class="map-text-inner">
+                        <div class="map-title">Федеральное государственное унитарное предприятие «Научно-исследовательский институт стандартизации и унификации»</div>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>Адрес:</td>
+                                    <td>107113, Москва, Сокольнический вал, 37/10</td>
+                                </tr>
+                                <tr>
+                                    <td>Телефон:</td>
+                                    <td>+7 (495) 287-45-63</td>
+                                </tr>
+                                <tr>
+                                    <td>Факс:</td>
+                                    <td>+7 (499) 264-77-77</td>
+                                </tr>
+                                <tr>
+                                    <td>E-mail:</td>
+                                    <td><a href="mailto:info@niisu.ru">info@niisu.ru</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="map-text-how">
+                            <h3>Как проехать</h3>
+                            Иначе говоря, политические учения Гоббса ограничивает феномен толпы, отмечает Г.Алмонд. Политическое учение Платона однозначно сохраняет антропологический марксизм. Понятие модернизации отражает конструктивный кризис легитимности. Элемент политического процесса теоретически иллюстрирует марксизм. Вопреки распространенным утверждениям, политическое учение Аристотеля иллюстрирует коллапс Советского Союза.
+                        </div>
+                        <div class="map-detail-link"><a href="#" rel="Свернуть">Как проехать</a></div>
                     </div>
-                    <div class="map-detail-link"><a href="#" rel="Свернуть">Как проехать</a></div>
+                    <div class="map-how"><img src="images/contacts-how.jpg" alt="" width="648" height="554" /></div>
                 </div>
-                <div class="map-how"><img src="images/contacts-how.jpg" alt="" width="648" height="554" /></div>
             </div>
+            <!-- map END -->
+
         </div>
-        <!-- map END -->
+        <!-- wrapper END -->
 
     </body>
 </html>
