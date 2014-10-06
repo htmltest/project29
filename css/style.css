@@ -327,7 +327,7 @@ input.btn {min-width:170px}
 .window {position:absolute; left:0; top:0; width:100%; height:100%; z-index:99997; overflow:auto}
 .window-overlay {position:absolute; left:0; top:0; width:100%; height:100%; z-index:99998; background:#000; opacity:.7; filter:progid:DXImageTransform.Microsoft.Alpha(opacity=70)}
 .window-loading {position:absolute; left:50%; top:50%; width:24px; height:24px; margin:-12px 0 0 -12px; background:url(../images/window-loading.gif)}
-.window-container {position:absolute; z-index:99999; left:50%; top:50%}
+.window-container {position:absolute; z-index:99999; left:50%; top:40px}
 .window-container-load {position:fixed; left:-9999px; top:-9999px}
 .window-content {position:relative; background:#fff}
 .window-close {display:block; position:absolute; right:-52px; top:0; width:52px; height:52px; background:#1f1584 url(../images/window-close.png) no-repeat center}
@@ -351,6 +351,8 @@ input.btn {min-width:170px}
 .service-top-prev a {display:table-cell; padding:0 0 0 30px; height:54px; background:url(../images/service-top-left.png) no-repeat left center; vertical-align:middle; text-decoration:none; color:#fff}
 .service-top-next a {display:table-cell; padding:0 30px 0 0; text-align:right; height:54px; background:url(../images/service-top-right.png) no-repeat right center; vertical-align:middle; text-decoration:none; color:#fff}
 
+.service-loading {position:relative; height:24px; margin:25px 0 7px 0; background:url(../images/service-loading.gif) no-repeat center}
+
 .service-header {width:100%}
 .service-header:after {content:"."; display:block; clear:both; visibility:hidden; height:0}
 .service-order-link {float:right}
@@ -373,6 +375,7 @@ input.btn {min-width:170px}
 }
 
 .service-link {margin-left:14px}
+.structure-item-name .service-link {margin:0}
 
 .structure-table table {width:100%; border-collapse:collapse; border-bottom:0}
 .structure-table table th {background:none; color:#1b1464; font-size:24px; line-height:24px; padding:0; text-align:center}

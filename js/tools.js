@@ -224,7 +224,7 @@ var timerDevelopmentSlider  = null;
             e.preventDefault();
         });
 
-        $('body').on('click', '.sert-list a, .service-top a, .structure-item-name a, .service-link, .service-order-link a', function(e) {
+        $('body').on('click', '.sert-list a, .service-order-link a', function(e) {
             if ($('.window').length > 0) {
                 windowClose();
             }
@@ -235,6 +235,107 @@ var timerDevelopmentSlider  = null;
             }).done(function(html) {
                 windowOpen(html);
             })
+            e.preventDefault();
+        });
+
+        $('body').on('click', '.service-link', function(e) {
+            var curLink = $(this);
+            var curIndex = $('.service-link').index(curLink);
+
+            var prevIndex = curIndex - 1;
+            if (prevIndex < 0) {
+                prevIndex = $('.service-link').length - 1;
+            }
+            var prevItem = $('.service-link').eq(prevIndex).html();
+
+            var nextIndex = curIndex + 1;
+            if (nextIndex > $('.service-link').length - 1) {
+                nextIndex = 0;
+            }
+            var nextItem = $('.service-link').eq(nextIndex).html();
+
+
+            var newHTML =   '<div class="service">' +
+                                '<div class="service-top">' +
+                                    '<div class="service-top-prev"><a href="#" rel="' + prevIndex + '">' + prevItem + '</a></div>' +
+                                    '<div class="service-top-next"><a href="#" rel="' + nextIndex + '">' + nextItem + '</a></div>' +
+                                '</div>' +
+                                '<div class="content"><div class="service-loading"></div></div>' +
+                            '</div>';
+
+            windowOpen(newHTML);
+
+            $.ajax({
+                url: $(this).attr('href'),
+                dataType: 'html',
+                cache: false
+            }).done(function(html) {
+                $('.window .service .content').html(html);
+                if ($('.window-container img').length > 0) {
+                    $('.window-container img').each(function() {
+                        $(this).attr('src', $(this).attr('src'));
+                    });
+                    $('.window-container').data('curImg', 0);
+                    $('.window-container img').load(function() {
+                        var curImg = $('.window-container').data('curImg');
+                        curImg++;
+                        $('.window-container').data('curImg', curImg);
+                        if ($('.window-container img').length == curImg) {
+                            windowPosition();
+                        }
+                    });
+                } else {
+                    windowPosition();
+                }
+            })
+
+            e.preventDefault();
+        });
+
+        $('body').on('click', '.service-top a', function(e) {
+            var curIndex = Number($(this).attr('rel'));
+
+            var prevIndex = curIndex - 1;
+            if (prevIndex < 0) {
+                prevIndex = $('.service-link').length - 1;
+            }
+            var prevItem = $('.service-link').eq(prevIndex).html();
+
+            var nextIndex = curIndex + 1;
+            if (nextIndex > $('.service-link').length - 1) {
+                nextIndex = 0;
+            }
+            var nextItem = $('.service-link').eq(nextIndex).html();
+
+
+            $('.service-top-prev a').attr('rel', prevIndex).html(prevItem);
+            $('.service-top-next a').attr('rel', nextIndex).html(nextItem);
+            $('.window .content').html('<div class="service-loading"></div>');
+
+            $.ajax({
+                url: $('.service-link').eq(curIndex).attr('href'),
+                dataType: 'html',
+                cache: false
+            }).done(function(html) {
+                $('.window .service .content').html(html);
+                if ($('.window-container img').length > 0) {
+                    $('.window-container img').each(function() {
+                        $(this).attr('src', $(this).attr('src'));
+                    });
+                    $('.window-container').data('curImg', 0);
+                    $('.window-container img').load(function() {
+                        var curImg = $('.window-container').data('curImg');
+                        curImg++;
+                        $('.window-container').data('curImg', curImg);
+                        if ($('.window-container img').length == curImg) {
+                            windowPosition();
+                        }
+                    });
+                } else {
+                    windowPosition();
+                }
+            })
+
             e.preventDefault();
         });
 
@@ -405,11 +506,8 @@ var timerDevelopmentSlider  = null;
             $('.window-container').css({'margin-left': -$('.window-container').width() / 2});
         }
 
-        if ($('.window-container').height() > windowHeight - 110) {
-            $('.window-container').css({'margin-top': 55, 'top': 'auto'});
-            $('.window-overlay').height($('.window-container').height() + 110);
-        } else {
-            $('.window-container').css({'margin-top': -$('.window-container').height() / 2});
+        if ($('.window-container').height() > windowHeight - 80) {
+            $('.window-overlay').height($('.window-container').height() + 80);
         }
     }
 
