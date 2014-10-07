@@ -240,28 +240,49 @@ var timerDevelopmentSlider  = null;
 
         $('body').on('click', '.service-link', function(e) {
             var curLink = $(this);
-            var curIndex = $('.service-link').index(curLink);
+            if (curLink.attr('rel')) {
+                var addSelector = '[rel="' + curLink.attr('rel') + '"]';
+                var relCurrent = ' rel="' + curLink.attr('rel') + '"';
+            } else {
+                var addSelector = '';
+                var relCurrent = '';
+            }
+            var curIndex = $('.service-link' + addSelector).index(curLink);
 
             var prevIndex = curIndex - 1;
             if (prevIndex < 0) {
-                prevIndex = $('.service-link').length - 1;
+                prevIndex = $('.service-link' + addSelector).length - 1;
             }
-            var prevItem = $('.service-link').eq(prevIndex).html();
+            if ($('.service-link' + addSelector).eq(prevIndex).attr('title')) {
+                var prevItem = $('.service-link' + addSelector).eq(prevIndex).attr('title');
+            } else {
+                var prevItem = $('.service-link' + addSelector).eq(prevIndex).html();
+            }
 
             var nextIndex = curIndex + 1;
-            if (nextIndex > $('.service-link').length - 1) {
+            if (nextIndex > $('.service-link' + addSelector).length - 1) {
                 nextIndex = 0;
             }
-            var nextItem = $('.service-link').eq(nextIndex).html();
+            if ($('.service-link' + addSelector).eq(nextIndex).attr('title')) {
+                var nextItem = $('.service-link' + addSelector).eq(nextIndex).attr('title');
+            } else {
+                var nextItem = $('.service-link' + addSelector).eq(nextIndex).html();
+            }
 
 
-            var newHTML =   '<div class="service">' +
-                                '<div class="service-top">' +
-                                    '<div class="service-top-prev"><a href="#" rel="' + prevIndex + '">' + prevItem + '</a></div>' +
-                                    '<div class="service-top-next"><a href="#" rel="' + nextIndex + '">' + nextItem + '</a></div>' +
-                                '</div>' +
-                                '<div class="content"><div class="service-loading"></div></div>' +
-                            '</div>';
+            if ($('.service-link' + addSelector).length > 1) {
+                var newHTML =   '<div class="service">' +
+                                    '<div class="service-top">' +
+                                        '<div class="service-top-prev"><a href="#"' + relCurrent + ' rev="' + prevIndex + '">' + prevItem + '</a></div>' +
+                                        '<div class="service-top-next"><a href="#"' + relCurrent + ' rev="' + nextIndex + '">' + nextItem + '</a></div>' +
+                                    '</div>' +
+                                    '<div class="content"><div class="service-loading"></div></div>' +
+                                '</div>';
+            } else {
+                var newHTML =   '<div class="service">' +
+                                    '<div class="content"><div class="service-loading"></div></div>' +
+                                '</div>';
+            }
 
             windowOpen(newHTML);
 
@@ -293,23 +314,37 @@ var timerDevelopmentSlider  = null;
         });
 
         $('body').on('click', '.service-top a', function(e) {
-            var curIndex = Number($(this).attr('rel'));
+            var curIndex = Number($(this).attr('rev'));
+
+            if ($(this).attr('rel')) {
+                var addSelector = '[rel="' + $(this).attr('rel') + '"]';
+            } else {
+                var addSelector = '';
+            }
 
             var prevIndex = curIndex - 1;
             if (prevIndex < 0) {
-                prevIndex = $('.service-link').length - 1;
+                prevIndex = $('.service-link' + addSelector).length - 1;
             }
-            var prevItem = $('.service-link').eq(prevIndex).html();
+            if ($('.service-link' + addSelector).eq(prevIndex).attr('title')) {
+                var prevItem = $('.service-link' + addSelector).eq(prevIndex).attr('title');
+            } else {
+                var prevItem = $('.service-link' + addSelector).eq(prevIndex).html();
+            }
 
             var nextIndex = curIndex + 1;
-            if (nextIndex > $('.service-link').length - 1) {
+            if (nextIndex > $('.service-link' + addSelector).length - 1) {
                 nextIndex = 0;
             }
-            var nextItem = $('.service-link').eq(nextIndex).html();
+            if ($('.service-link' + addSelector).eq(nextIndex).attr('title')) {
+                var nextItem = $('.service-link' + addSelector).eq(nextIndex).attr('title');
+            } else {
+                var nextItem = $('.service-link' + addSelector).eq(nextIndex).html();
+            }
 
+            $('.service-top-prev a').attr('rev', prevIndex).html(prevItem);
+            $('.service-top-next a').attr('rev', nextIndex).html(nextItem);
 
-            $('.service-top-prev a').attr('rel', prevIndex).html(prevItem);
-            $('.service-top-next a').attr('rel', nextIndex).html(nextItem);
             $('.window .content').html('<div class="service-loading"></div>');
 
             $.ajax({
