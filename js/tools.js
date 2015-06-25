@@ -78,26 +78,28 @@ var timerDevelopmentSlider  = null;
         }
 
         $('.slider').on('click', '.slider-ctrl a', function(e) {
-            window.clearTimeout(timerSlider);
-            timerSlider = null;
+            if (!$(this).hasClass('active')) {
+                window.clearTimeout(timerSlider);
+                timerSlider = null;
 
-            var curSlider = $('.slider');
-            if (curSlider.data('disableAnimation')) {
-                var curIndex = curSlider.data('curIndex');
-                var newIndex = $('.slider-ctrl a').index($(this));
+                var curSlider = $('.slider');
+                if (curSlider.data('disableAnimation')) {
+                    var curIndex = curSlider.data('curIndex');
+                    var newIndex = $('.slider-ctrl a').index($(this));
 
-                curSlider.data('curIndex', newIndex);
-                curSlider.data('disableAnimation', false);
-                $('.slider-ctrl a.active').removeClass('active');
-                $('.slider-ctrl a').eq(newIndex).addClass('active');
-                curSlider.find('ul li').eq(curIndex).css({'z-index': 1, 'opacity': 1});
-                curSlider.find('ul li').eq(newIndex).css({'z-index': 'auto', 'left': 0, 'top': 0}).css({'opacity': 1});
-                curSlider.find('ul li').eq(curIndex).animate({'opacity': 0}, speedSlider, function() {
-                    curSlider.data('disableAnimation', true);
-                    if (periodSlider > 0) {
-                        timerSlider = window.setTimeout(sliderNext, periodSlider);
-                    }
-                });
+                    curSlider.data('curIndex', newIndex);
+                    curSlider.data('disableAnimation', false);
+                    $('.slider-ctrl a.active').removeClass('active');
+                    $('.slider-ctrl a').eq(newIndex).addClass('active');
+                    curSlider.find('ul li').eq(curIndex).css({'z-index': 1, 'opacity': 1});
+                    curSlider.find('ul li').eq(newIndex).css({'z-index': 'auto', 'left': 0, 'top': 0}).css({'opacity': 1});
+                    curSlider.find('ul li').eq(curIndex).animate({'opacity': 0}, speedSlider, function() {
+                        curSlider.data('disableAnimation', true);
+                        if (periodSlider > 0) {
+                            timerSlider = window.setTimeout(sliderNext, periodSlider);
+                        }
+                    });
+                }
             }
 
             e.preventDefault();
